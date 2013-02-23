@@ -1,0 +1,5 @@
+SELECT project.*,UC.user_count,TC.task_count,UC.Current_Fund
+FROM project
+JOIN(SELECT `Project ID`,COUNT(`User ID`)AS user_count,SUM( `FundingAmount` ) AS Current_Fund FROM project_user_fund GROUP BY `Project ID`)AS UC ON project.ID=UC.`Project ID`
+
+JOIN(SELECT `Project ID`, COUNT(`Task ID`)AS task_count FROM project_task_user GROUP BY `Project ID`)AS TC ON project.ID=TC.`Project ID`
