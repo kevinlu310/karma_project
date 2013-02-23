@@ -72,7 +72,10 @@ exports.attach = function attachRoutes(app) {
 			var users = [];
 			if (!err && rows.length !== 0) {
 				users = rows;
-			}
+			} else if(err) {
+                console.log("ERROR", err);
+            }
+
 			db.end();
 	    	res.send(users);
 		});
