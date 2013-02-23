@@ -2,6 +2,9 @@ nyuad.Views.ApplicationView = Backbone.View.extend({
 
    el: $("#kp-app"),
    template: _.template($("#recent-template").html()),
+   events:{
+      // Capture events from the DOM
+   },
 
    initialize: function () {
       this.projects = new nyuad.Collections.RecentProjects();
