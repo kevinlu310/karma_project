@@ -1,4 +1,6 @@
 var mysql      = require('mysql');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 function executeQuery(app, sql, callback) {
 	var connection = mysql.createConnection({
@@ -13,10 +15,51 @@ function executeQuery(app, sql, callback) {
 	connection.end();
 }
 
+function attachAuth(app) {
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+    passport.use(new FacebookStrategy({
+        clientID: '214934941983073',
+        clientSecret: '8a1777522998b540e49f5e25cce75c86',
+        callbackURL: 'http://thekarmaproject.com:3000/auth/facebook/callback'
+    }, function (accessToken, refreshToken, profile, done){
+        console.log("auth", done, profile.id);
+        done(null, profile);
+    }));
+
+    passport.serializeUser(function (user, done){
+        console.log("USER SERIALIZE", user);
+        done(null, {
+            id: user.id,
+            name: user.displayName
+        });
+    });
+
+    passport.deserializeUser(function(id, done){
+        console.log("USER DESERIALIZE", id);
+        done(null, id);
+    });   
+
+}
 
 exports.attach = function attachRoutes(app) {
+    attachAuth(app);
+
+
     app.get('/', function (req, res) {
-        res.render('index');
+        console.log("USER", req.user);
+        res.render('index', {
+            user: (req.user)
+        });
+
+    });
+
+    app.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {successRedirect:'/', failureRedirect: '/login'}));
+    app.get('/logout', function(req,res){
+        req.logout();
+        res.redirect("/");
     });
 
     app.get('/api/users', function (req, res) {
