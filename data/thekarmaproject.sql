@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2013 at 09:17 AM
+-- Generation Time: Feb 23, 2013 at 12:38 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -43,10 +43,10 @@ CREATE TABLE IF NOT EXISTS `project` (
 --
 
 INSERT INTO `project` (`ID`, `Title`, `Description`, `Picture`, `Owner ID`, `Funding`) VALUES
-(0, 'Art fair', 'support creativity by helping us organize the next coming art fair at Al Saadiat island ! ', 'http://distilleryimage8.s3.amazonaws.com/25caa47c1c8a11e2b3ea12313813ffc5_7.jpg', 1, 500),
-(1, 'House maintenance ', 'A House of a small family at Abu Dhabi Sheikh Zayed street in need for maintenance. Join us on this humanitarian mission', 'http://distilleryimage9.s3.amazonaws.com/ae96dcd89aff11e180c9123138016265_6.jpg', 1, 300),
-(2, 'Construction site', 'Labor forces needed at Massafeh district for building new factory building', 'http://distilleryimage0.s3.amazonaws.com/bc13c1a6f8dc11e19b6b22000a1e9e0a_6.jpg', 2, 1460),
-(3, 'School yard clearning', 'help make our school green! join community good people to clean the english school yard at Abu Dhabi', 'http://distilleryimage0.s3.amazonaws.com/ba34c7be483611e297b922000a1fa527_7.jpg', 4, 45);
+(1, 'Art fair', 'support creativity by helping us organize the next coming art fair at Al Saadiat island ! ', 'http://distilleryimage8.s3.amazonaws.com/25caa47c1c8a11e2b3ea12313813ffc5_7.jpg', 1, 500),
+(2, 'House maintenance ', 'A House of a small family at Abu Dhabi Sheikh Zayed street in need for maintenance. Join us on this humanitarian mission', 'http://distilleryimage9.s3.amazonaws.com/ae96dcd89aff11e180c9123138016265_6.jpg', 1, 300),
+(3, 'Construction site', 'Labor forces needed at Massafeh district for building new factory building', 'http://distilleryimage0.s3.amazonaws.com/bc13c1a6f8dc11e19b6b22000a1e9e0a_6.jpg', 2, 1460),
+(4, 'School yard clearning', 'help make our school green! join community good people to clean the english school yard at Abu Dhabi', 'http://distilleryimage0.s3.amazonaws.com/ba34c7be483611e297b922000a1fa527_7.jpg', 4, 45);
 
 -- --------------------------------------------------------
 
@@ -152,6 +152,7 @@ INSERT INTO `task` (`ID`, `Title`, `Resources Num`, `Karma`) VALUES
 CREATE TABLE IF NOT EXISTS `user` (
   `ID` int(11) NOT NULL,
   `Name` mediumtext NOT NULL,
+  `Biography` text NOT NULL,
   `Karma` int(11) NOT NULL,
   `userpicture` text NOT NULL,
   PRIMARY KEY (`ID`)
@@ -161,12 +162,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`ID`, `Name`, `Karma`, `userpicture`) VALUES
-(1, 'Ahmed', 2, 'http://www.thenational.ae/deployedfiles/Assets/Richmedia/Image/AD200910712119896AR.jpg'),
-(2, 'John', 11, 'http://images.askmen.com/sports/keywords/personal-trainer_965841.jpg'),
-(3, 'Mia', 3, 'http://www.sca.com/PageFiles/15/sca-personal-care-2011.jpg?epslanguage=en'),
-(4, 'Paul', 15, 'http://www.wired.com/images_blogs/gadgetlab/2009/07/js-personal-supercomputer.jpg'),
-(5, 'Mary', 22, 'http://womantalks.com/var/ezflow_site/storage/images/wd2/content/money/saving-money/top-5-personal-finance-resources-online/638048-1-eng-US/Top-5-Personal-Finance-Resources-Online_full_article_vertical.jpg');
+INSERT INTO `user` (`ID`, `Name`, `Biography`, `Karma`, `userpicture`) VALUES
+(1, 'Ahmed', 'Ahmed works for the health sector', 2, 'http://www.thenational.ae/deployedfiles/Assets/Richmedia/Image/AD200910712119896AR.jpg'),
+(2, 'John', 'Student and health trainer', 11, 'http://images.askmen.com/sports/keywords/personal-trainer_965841.jpg'),
+(3, 'Mia', 'Student and artist', 3, 'http://www.sca.com/PageFiles/15/sca-personal-care-2011.jpg?epslanguage=en'),
+(4, 'Paul', 'Computer Expert for 10 years', 15, 'http://www.wired.com/images_blogs/gadgetlab/2009/07/js-personal-supercomputer.jpg'),
+(5, 'Mary', 'Event Organizer', 22, 'http://womantalks.com/var/ezflow_site/storage/images/wd2/content/money/saving-money/top-5-personal-finance-resources-online/638048-1-eng-US/Top-5-Personal-Finance-Resources-Online_full_article_vertical.jpg');
 
 --
 -- Constraints for dumped tables
