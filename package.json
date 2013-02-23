@@ -5,7 +5,8 @@
   "dependencies": {
   	"mysql": "2.0.0-alpha7",
   	"express": "3.1.0",
-  	"ejs": "0.8.3"
+  	"ejs": "0.8.3",
+    "passport": "0.1.15"
    },
   "scripts": {
     "start": "node web/server.js"
