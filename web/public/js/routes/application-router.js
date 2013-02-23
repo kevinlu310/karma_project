@@ -3,10 +3,9 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
     routes: {
         "": "index",
         "index": "index",
-        "users/": "users",
         "users/:id": "users",
         "projects/": "projects",
-        "projects/:id": "projects",
+        "projects/:id": "projects"
     },
 
     index: function() {
@@ -15,14 +14,20 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
 
     users: function(id) {
         if(id) {
-            console.log("users called for id:" + id);
+            var user = new nyuad.Models.User({"id": id});
+            new nyuad.Views.UserView(user);
         } else {
-            console.log("users called for listing");
+            alert("User must specify an id");
         }
     },
 
     projects: function(id) {
-        console.log("projects called for listing");
+        if(id){
+            var project = new nyuad.Models.Project({"id": id});
+            new nyuad.Views.ProjectView(project);
+        } else {
+            new nyuad.Views.ProjectListing();
+        }
     }
 
 });
