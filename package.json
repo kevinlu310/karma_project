@@ -1,7 +1,14 @@
 {
-  "author": "",
-  "name": "",
+  "author": "The Karma Project Team",
+  "name": "TheKarmaProject",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+  	"mysql": "2.0.0-alpha7",
+  	"express": "3.1.0",
+  	"ejs": "0.8.3"
+   },
+  "scripts": {
+    "start": "node web/server.js"
+  },
   "devDependencies": {}
 }
