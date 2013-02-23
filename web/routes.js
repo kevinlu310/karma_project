@@ -1,12 +1,32 @@
+var mysql      = require('mysql');
+
+function executeQuery(app, sql, callback) {
+	var connection = mysql.createConnection({
+	  host     : 'localhost',
+	  database : 'phprestsql',
+	  user     : app.get('dbusername'),
+	  password : app.get('dbpassword'),
+	});
+	
+	connection.connect();
+	connection.query(sql, callback);
+	connection.end();
+}
+
+
 exports.attach = function attachRoutes(app) {
     app.get('/', function (req, res) {
         res.render('index');
     });
 
     app.get('/api/users', function (req, res) {
-        res.send([{
-            "id": "foo"
-        }]);
+    	executeQuery(app, "SELECT * FROM user", function(err, rows, fields) {
+			if (err) throw err;
+			
+	    	res.send([{
+	            "id": rows.length
+	        }]);
+		});
     });
 
     app.get('/api/users/:id', function (req, res) {
