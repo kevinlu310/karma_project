@@ -25,9 +25,11 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
 
     projects: function(id) {
         if(id){
+            console.log("Asked for project id:", id);
             var project = new nyuad.Models.Project({"id": id});
             new nyuad.Views.ProjectView({model: project});
         } else {
+            console.log("Asked for project listing");
             new nyuad.Views.ProjectListing();
         }
     }

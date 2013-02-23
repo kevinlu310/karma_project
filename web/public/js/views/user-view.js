@@ -1,4 +1,4 @@
-nyuad.Views.User = Backbone.View.extend({
+nyuad.Views.UserView = Backbone.View.extend({
 
    template: _.template($("#user-view-template").html()),
    events: {
