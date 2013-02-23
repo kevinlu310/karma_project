@@ -15,7 +15,7 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
     users: function(id) {
         if(id) {
             var user = new nyuad.Models.User({"id": id});
-            new nyuad.Views.UserView(user);
+            new nyuad.Views.UserView({model: user});
         } else {
             alert("User must specify an id");
         }
@@ -24,7 +24,7 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
     projects: function(id) {
         if(id){
             var project = new nyuad.Models.Project({"id": id});
-            new nyuad.Views.ProjectView(project);
+            new nyuad.Views.ProjectView({model: project});
         } else {
             new nyuad.Views.ProjectListing();
         }
