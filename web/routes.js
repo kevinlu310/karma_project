@@ -142,7 +142,7 @@ exports.attach = function attachRoutes(app) {
 				}
 				
 				//getting Tasks
-				executeQuery(db, "SELECT task.`Title`, T.countUID,  FROM task JOIN (SELECT COUNT(`User ID`) AS countUID, `project_task_user`.`Task ID` from `project_task_user` WHERE `User ID` IS NOT NULL GROUP BY `Task ID`) AS T ON task.`ID` = T.`Task ID`"+req.params.id, function(err, rows3, fields2) {
+				executeQuery(db, "SELECT task.`Title`, T.countUID, task.`Resources Num` FROM task JOIN (SELECT COUNT(`User ID`) AS countUID, `project_task_user`.`Task ID` from `project_task_user` WHERE `User ID` IS NOT NULL AND project_task_user.`Project ID` = "+req.params.id+" GROUP BY `Task ID`) AS T ON task.`ID` = T.`Task ID`", function(err, rows3, fields2) {
 					if (!err && rows3.length !== 0) {
 						users.tasks_projects = rows3;
 					}
