@@ -1,10 +1,26 @@
-nyuad.Views.applicationView = Backbone.View.extend({
+nyuad.Views.ApplicationView = Backbone.View.extend({
 
    el: $("#kp-app"),
+   template: _.template($("#recent-template").html()),
 
    initialize: function () {
-      var projects = new nyuad.Collections.Projects();
+      this.projects = new nyuad.Collections.RecentProjects();
+      this.listenTo(this.projects, "add", this.addOne);
+      this.listenTo(this.projects, "all", this.render);
+      this.projects.fetch();
+   },
 
+   addOne: function (project) {
+      var project_card = new nyuad.Views.ProjectCard({
+         model: project
+      });
+
+      this.el.append(project_card.render().el);
+
+   },
+
+   render: function () {
+      // something
    }
 
 });
