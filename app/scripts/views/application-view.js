@@ -1,6 +1,11 @@
 nyuad.Views.applicationView = Backbone.View.extend({
 
-  //template: application
+   el: $("#kp-app"),
+
+   initialize: function () {
+      var projects = new nyuad.Collections.Projects();
+
+   }
 
 });
 
