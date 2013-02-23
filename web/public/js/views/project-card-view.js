@@ -3,7 +3,7 @@ nyuad.Views.ProjectCard = Backbone.View.extend({
    tagName: "li",
    template: _.template($("#project-card-template").html()),
    events: {
-      "click .explore": "open"
+      "click .explore": "openProject"
    },
 
    initialize: function () {
@@ -16,7 +16,7 @@ nyuad.Views.ProjectCard = Backbone.View.extend({
       return this;
    },
 
-   open: function(){
+   openProject: function(){
       this.navigate("projects/" + model.id);
    }
 });

@@ -2,7 +2,7 @@ nyuad.Views.UserView = Backbone.View.extend({
 
    template: _.template($("#user-view-template").html()),
    events: {
-      // Stuff
+      "click .btn": "onClick"
    },
 
    initialize: function () {
@@ -12,5 +12,9 @@ nyuad.Views.UserView = Backbone.View.extend({
    render: function () {
       this.el.html(this.model.toJSON());
       return this;
+   },
+
+   onClick: function (event) {
+      console.log("Clicked on " + event);
    }
 });
