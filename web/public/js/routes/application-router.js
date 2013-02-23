@@ -29,5 +29,4 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
             new nyuad.Views.ProjectListing();
         }
     }
-
 });

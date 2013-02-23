@@ -1,6 +1,6 @@
-nyuad.Views.ProjectView = Backbone.View.extend({
+nyuad.Views.User = Backbone.View.extend({
 
-   template: _.template($("#project-view-template").html()),
+   template: _.template($("#user-view-template").html()),
    events: {
       // Stuff
    },
