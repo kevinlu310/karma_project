@@ -1,5 +1,4 @@
 <?php
-/*
 require_once('includes/Oauth.php');
 require_once('includes/Facebook.php');
 
@@ -11,16 +10,10 @@ $callback = 'http://localhost/auth/facebook.php'; // [DOMAIN]/auth/facebook.php 
 
 $facebook = new Facebook($app_id, $app_secret, $callback);
 if($facebook->validateAccessToken()){
-        $response = $facebook->makeRequest('https://graph.facebook.com/me');
-        print_r($response);
+        header('Location: ../index.php');
 }
 
-*/
-require_once('phprestsql.php');
-
-$PHPRestSQL =& new PHPRestSQL();
-$PHPRestSQL->exec();
-
+exit;
 /*
 echo '<pre>';
 var_dump($PHPRestSQL->output);
