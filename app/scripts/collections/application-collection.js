@@ -28,7 +28,7 @@ nyuad.Collections.RecentProjects = Backbone.Collection.extend({
 nyuad.Collections.Users = Backbone.Collection.extend({
    model: nyuad.Models.User,
 
-   initialize: function (models, opetions) {
+   initialize: function (models, options) {
       this._id = options && options.id ? options.id : null;
    },
 
