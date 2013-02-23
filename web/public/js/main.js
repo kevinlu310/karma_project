@@ -6,6 +6,7 @@ window.nyuad = {
    init: function() {
       new nyuad.Routers.ApplicationRouter();
       Backbone.history.start();
+      console.log("Hello from Karma Project");
    }
 };
 

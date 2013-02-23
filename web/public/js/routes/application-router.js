@@ -9,11 +9,13 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
     },
 
     index: function() {
+        console.log("ApplicationRouter.index()");
         new nyuad.Views.ApplicationView();
     },
 
     users: function(id) {
         if(id) {
+            console.log("Asked for users.");
             var user = new nyuad.Models.User({"id": id});
             new nyuad.Views.UserView({model: user});
         } else {
