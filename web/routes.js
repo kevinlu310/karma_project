@@ -21,11 +21,12 @@ exports.attach = function attachRoutes(app) {
 
     app.get('/api/users', function (req, res) {
     	executeQuery(app, "SELECT * FROM user", function(err, rows, fields) {
-			if (err) throw err;
+			var users = [];
+			if (!err && rows.length !== 0) {
+				users = rows;
+			}
 			
-	    	res.send([{
-	            "id": rows.length
-	        }]);
+	    	res.send(users);
 		});
     });
 
