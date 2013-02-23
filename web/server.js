@@ -9,6 +9,9 @@ app.set('view engine', 'html');
 app.set('dbusername', process.env.DBUSER || "root");
 app.set('dbpassword', process.env.DBPASSWORD || "mypass");
 
+app.use(express.cookieParser());
+app.use(express.bodyParser());
+app.use(express.session({secret: 'foo'}));
 app.use(express.logger());
 app.use('/static', express.static(__dirname+'/public'));
 
