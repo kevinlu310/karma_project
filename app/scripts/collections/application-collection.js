@@ -36,3 +36,17 @@ nyuad.Collections.Users = Backbone.Collection.extend({
       return "/api/users/" + this._id;
    }
 });
+
+nyuad.Collections.Tasks = Backbone.Collection.extend({
+
+   model: nyuad.Models.Task,
+
+   initialize: function (models, options) {
+      this._id = options && options.id ? options.id: null;
+   },
+
+   url: function () {
+      // TODO this is clearly wrong, tasks are embedded in Projects
+      return "/api/tasks/" + this._id;
+   }
+});
