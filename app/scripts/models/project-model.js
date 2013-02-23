@@ -1,9 +1,12 @@
 nyuad.Models.Project = Backbone.Model.extend({
    urlRoot: "/api/projects",
+
    defaults: {
-      "title": "Null Project",
+      "title": "Empty title",
       "description": "Lorem Ipsumify this",
-      "image_url": "https://upload.wikimedia.org/wikipedia/en/0/0d/Null.png"
+      "picture": "https://upload.wikimedia.org/wikipedia/en/0/0d/Null.png",
+      "funding": 0,
+      "owner": 0
    },
 
    initialize: function() {
