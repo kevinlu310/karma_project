@@ -166,7 +166,7 @@ exports.attach = function attachRoutes(app) {
 
    app.get('/api/projects', function(req, res) {
       var db = connectDB(app);
-      executeQuery(db, "SELECT project.* , UC.user_count, TC.task_count, UC.current_fund, NTC.task_not_assigned FROM project LEFT JOIN ( SELECT `project_id` , COUNT( `user_id` ) AS user_count, SUM( `funding_amount` ) AS current_fund FROM project_user_fund GROUP BY `project_id`) AS UC ON project.id = UC.`project_id` LEFT JOIN ( SELECT `project_id` , COUNT( `task_id` ) AS task_count FROM project_task_user GROUP BY `project_id`) AS TC ON project.id = TC.`project_id` LEFT JOIN (SELECT `project_id` , COUNT( `task_id` ) AS task_not_assigned FROM project_task_user WHERE `user_id` IS NULL GROUP BY `project_id` ) AS NTC ON project.id = NTC.`project_id`", function(err, rows, fields) {
+      executeQuery(db, "SELECT project.*, UT.`owner_name`, UC.user_count, TC.task_count, UC.current_fund, NTC.task_not_assigned FROM project LEFT JOIN ( SELECT `project_id` , COUNT( `user_id` ) AS user_count, SUM( `funding_amount` ) AS current_fund FROM project_user_fund GROUP BY `project_id`) AS UC ON project.id = UC.`project_id` LEFT JOIN ( SELECT `project_id` , COUNT( `task_id` ) AS task_count FROM project_task_user GROUP BY `project_id`) AS TC ON project.id = TC.`project_id` LEFT JOIN (SELECT `project_id` , COUNT( `task_id` ) AS task_not_assigned FROM project_task_user WHERE `user_id` IS NULL GROUP BY `project_id` ) AS NTC ON project.id = NTC.`project_id` JOIN (SELECT user.id, user.`name` As owner_name FROM user) AS UT ON project.`owner_id` = UT.`id`", function(err, rows, fields) {
          var users = [];
          if(!err && rows.length !== 0) {
             users = rows;
@@ -178,7 +178,7 @@ exports.attach = function attachRoutes(app) {
 
    app.get('/api/recent_projects', function(req, res) {
       var db = connectDB(app);
-      executeQuery(db, "SELECT * FROM (SELECT project.* , UC.user_count, TC.task_count, UC.current_fund, NTC.task_not_assigned FROM project LEFT JOIN ( SELECT `project_id` , COUNT( `user_id` ) AS user_count, SUM( `funding_amount` ) AS current_fund FROM project_user_fund GROUP BY `project_id`) AS UC ON project.id = UC.`project_id` LEFT JOIN ( SELECT `project_id` , COUNT( `task_id` ) AS task_count FROM project_task_user GROUP BY `project_id`) AS TC ON project.id = TC.`project_id` LEFT JOIN (SELECT `project_id` , COUNT( `task_id` ) AS task_not_assigned FROM project_task_user WHERE `user_id` IS NULL GROUP BY `project_id` ) AS NTC ON project.id = NTC.`project_id`  ORDER BY tstamp DESC) AS T LIMIT 3", function(err, rows, fields) {
+      executeQuery(db, "SELECT * FROM (SELECT project.*, UC.user_count, TC.task_count, UC.current_fund, NTC.task_not_assigned FROM project LEFT JOIN ( SELECT `project_id` , COUNT( `user_id` ) AS user_count, SUM( `funding_amount` ) AS current_fund FROM project_user_fund GROUP BY `project_id`) AS UC ON project.id = UC.`project_id` LEFT JOIN ( SELECT `project_id` , COUNT( `task_id` ) AS task_count FROM project_task_user GROUP BY `project_id`) AS TC ON project.id = TC.`project_id` LEFT JOIN (SELECT `project_id` , COUNT( `task_id` ) AS task_not_assigned FROM project_task_user WHERE `user_id` IS NULL GROUP BY `project_id` ) AS NTC ON project.id = NTC.`project_id`  ORDER BY tstamp DESC) AS T LIMIT 3", function(err, rows, fields) {
          var users = [];
          if(!err && rows.length !== 0) {
             console.log("no error!");
@@ -194,7 +194,7 @@ exports.attach = function attachRoutes(app) {
    app.get('/api/projects/:id', function(req, res) {
       var db = connectDB(app);
       var users = {};
-      executeQuery(db, "SELECT project.* , UC.user_count, TC.task_count, UC.current_fund, NTC.task_not_assigned FROM project LEFT JOIN ( SELECT `project_id` , COUNT( `user_id` ) AS user_count, SUM( `funding_amount` ) AS current_fund FROM project_user_fund GROUP BY `project_id`) AS UC ON project.id = UC.`project_id` LEFT JOIN ( SELECT `project_id` , COUNT( `task_id` ) AS task_count FROM project_task_user GROUP BY `project_id`) AS TC ON project.id = TC.`project_id` LEFT JOIN (SELECT `project_id` , COUNT( `task_id` ) AS task_not_assigned FROM project_task_user WHERE `user_id` IS NULL GROUP BY `project_id` ) AS NTC ON project.id = NTC.`project_id` WHERE ID=" + req.params.id, function(err, rows, fields) {
+      executeQuery(db, "SELECT project.* , UT.`owner_name`, UC.user_count, TC.task_count, UC.current_fund, NTC.task_not_assigned FROM project LEFT JOIN ( SELECT `project_id` , COUNT( `user_id` ) AS user_count, SUM( `funding_amount` ) AS current_fund FROM project_user_fund GROUP BY `project_id`) AS UC ON project.id = UC.`project_id` LEFT JOIN ( SELECT `project_id` , COUNT( `task_id` ) AS task_count FROM project_task_user GROUP BY `project_id`) AS TC ON project.id = TC.`project_id` LEFT JOIN (SELECT `project_id` , COUNT( `task_id` ) AS task_not_assigned FROM project_task_user WHERE `user_id` IS NULL GROUP BY `project_id` ) AS NTC ON project.id = NTC.`project_id` JOIN (SELECT user.id, user.`name` As owner_name FROM user) AS UT ON project.`owner_id` = UT.`id` WHERE project.id=" + req.params.id, function(err, rows, fields) {
          if(!err && rows.length !== 0) {
             users = rows[0];
          }
