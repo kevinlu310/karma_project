@@ -14,11 +14,11 @@ nyuad.Views.ProjectCreate = Backbone.View.extend({
       this.render();
       this.projects = new nyuad.Collections.Projects();
 
-      this.model.on("change", this.render);
+      this.model.on("change", this.render, this);
    },
    render: function() {
       // Do stuff
-      this.$el.html(this.template());
+      this.$el.html(this.template(this.model.toJSON()));
 
       var tasks = this.model.get("tasks_projects");
       var that = this;
