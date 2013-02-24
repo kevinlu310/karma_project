@@ -9,12 +9,9 @@
                 <dt>Username</dt>
                 <dd><@-name@></dd>
                 <dt>Total Fund Contributed</dt>
-                <dd>NUMBER</dd>
+                <dd>$<@-total_funds@></dd>
                 <dt>Total Tasks Done</dt>
-                <dd>NUMBER</dd>
-                <hr/>
-                <dt>Biography</dt>
-                <dd>SOME TEXT...SOME TEXT...SOME TEXT...</dd>
+                <dd><@-total_tasks@></dd>
                 <hr/>
                 <dt>Current Project</dt>
                 <dd><a href="#">SOME PROJECT</a></dd>
@@ -42,11 +39,11 @@
                 <li class="span4">
                     <h3>Projects Contributed Money For</h3>
                     <table class="table table-striped">
-                        <tr><th class="span4">Project</th><th class="span8">Money</th></tr>
-                         <tr>
-                            <td><a href="projectPage.html">Project 1</a></td>
-                            <td>NUMBER $</td>
-                        </tr>
+                    	<thead>
+                    		<tr><th class="span4">Project</th><th class="span8">Money</th></tr>
+                    	<thead>
+                        <tbody id="funds-list">
+                        </tbody>
                     </table>
                 </li>
 
