@@ -30,7 +30,7 @@ CREATE TABLE `project` (
   `title` text CHARACTER SET latin1 NOT NULL,
   `description` text CHARACTER SET latin1 NOT NULL,
   `picture` text CHARACTER SET latin1 NOT NULL,
-  `owner_id` int(11) NOT NULL,
+  `owner_id` bigint(11) NOT NULL,
   `funding` int(11) NOT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -62,7 +62,7 @@ CREATE TABLE `project_task_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` bigint(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `task_id` (`task_id`),
@@ -93,7 +93,7 @@ DROP TABLE IF EXISTS `project_user_fund`;
 CREATE TABLE `project_user_fund` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` bigint(11) NOT NULL,
   `funding_amount` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
@@ -121,7 +121,7 @@ DROP TABLE IF EXISTS `project_comments`;
 
 CREATE TABLE `project_comments` (
   `project_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` bigint(11) NOT NULL,
   `comment` text NOT NULL,
   PRIMARY KEY (`project_id`,`user_id`),
   CONSTRAINT `project_comments_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
@@ -173,7 +173,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `name` mediumtext NOT NULL,
   `karma` int(11) NOT NULL,
   `userpicture` text NOT NULL,
