@@ -69,7 +69,34 @@ function attachAuth(app) {
 
 exports.attach = function attachRoutes(app) {
    attachAuth(app);
+   app.post('/api/projects/:id/comment',function(req, res) {
+	   var comment_body = req.body.Comment,
+	   	   owner_id = req.user;
 
+      console.log("USER POST", owner_id);
+      console.log("BODY", req.body);
+	   	   
+      if (!owner_id) {
+         res.send("{error: 'user is undefined'}");
+         return;
+      }
+
+      var db = connectDB(app);
+
+      var insert = 'INSERT INTO project_comments SET ?';
+      var post = {
+         project_id: req.params.id,
+         user_id: owner_id,
+         comment: comment_body
+      };
+      console.log("INSERT", post);
+
+      var query = db.query(insert, post, function(err, rows, fields) {
+         console.log("inserted", err);
+         db.end();
+         res.send(rows);
+      });
+   });
 
    app.post('/api/projects', function(req, res) {
 
