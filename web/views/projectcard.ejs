@@ -1,6 +1,8 @@
 <script type="text/template" id="project-card-template">
     <div class="thumbnail">
-        <img src="<@- picture @>" alt="Project Thumbnail"/>
+        <div class="projectimgwrapper">
+        <img src="<@- picture @>" alt="Project Thumbnail" class="projectimg"/>
+        </div>
         <h3 class="text-error"><@-title@></h3>
         <p class="text-info"> <@-description@> </p>
         <!-- bars for each project card-->

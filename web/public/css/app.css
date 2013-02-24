@@ -1,0 +1,35 @@
+h1 {
+	color:red;
+}
+
+.projectimgwrapper {
+	position: relative;
+	height: 200px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.projectimg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+}
+
+.hero-unit{
+	background-image:url('http://2.bp.blogspot.com/-sHTVu-XnaMM/T0Ap9qx5TNI/AAAAAAAAAY0/tEC2xPuguVA/s1600/light-abstract-background2.jpg');
+
+}
+
+#hero-unit-header{
+	color:white;
+}
+
+#hero-unit-subtext{
+	color:white;
+}
+
+#profile-img{
+	height: 200px;
+	width: 100%;
+}

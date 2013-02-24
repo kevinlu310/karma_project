@@ -1,5 +1,5 @@
 nyuad.Views.ProjectCard = Backbone.View.extend({
-   className: "span4",
+   className: "span4 project-card",
    tagName: "li",
    template: _.template($("#project-card-template").html()),
    events: {
