@@ -2,18 +2,19 @@ nyuad.Views.ProjectCreate = Backbone.View.extend({
    // Should render ProjectCards onto a grid template
    el: "#main-content",
    template: _.template($("#project-create-template").html()),
-   task_template: _.template($("#project-create-task-template").html()),
+   task_template: _.template($("#project-create-task").html()),
    events: {
       "click .save": "saveProject",
       "click .reset": "resetProject",
       "click .addTask": "addTask",
-      "click .resetTask": "resetTask"
+      "click .resetTask": "resetTask",
+      "click .deleteTask": "deleteTask"
    },
    initialize: function() {
       this.render();
       this.projects = new nyuad.Collections.Projects();
 
-      this.listenTo(this.model, "change", this.render);
+      this.model.on("change", this.render);
    },
    render: function() {
       // Do stuff
@@ -59,20 +60,34 @@ nyuad.Views.ProjectCreate = Backbone.View.extend({
       var res = $("#resources").val();
       var karma = $("#karma").val();
 
+      if( title && res && karma ) {
+         var tasks = this.model.get("tasks_projects");
+         tasks.push({
+            id: tasks.length || 0,
+            title: title,
+            res: res,
+            karma: karma
+         });
+         this.model.set("tasks_projects", tasks);
+         $('#taskModal').modal("hide");
+         this.render();
+      } else {
+         alert("Can't add task with empty fields!");
+      }
+
+
+   },
+
+   deleteTask: function (e) {
       var tasks = this.model.get("tasks_projects");
-      tasks.push({
-         title: title,
-         res: res,
-         karma: karma
-      });
-      this.model.set("tasks_projects", tasks);
+      var id = $(e.target).closest("tr").attr("id");
    },
 
 
    resetTask: function (e) {
       e.preventDefault();
-      $("#taskTitle").reset();
-      $("#resources").reset();
-      $("#karma").reset();
+      $("#taskTitle").val("");
+      $("#resources").val("");
+      $("#karma").val("");
    }
 });
