@@ -7,7 +7,8 @@ nyuad.Views.ProjectView = Backbone.View.extend({
    comments_template: _.template($("#comment-list-template").html()),
 
    events: {
-      "click .contribute": "contribute"
+      "click .contribute": "contribute",
+      "click .comment": "comment"
    },
 
    initialize: function() {
@@ -51,6 +52,21 @@ nyuad.Views.ProjectView = Backbone.View.extend({
       });
 
       this.model.set("contributing_users", contribs);
+      this.render();
+   },
+
+   comment: function(e) {
+      e.preventDefault();
+      var comments = this.model.get("comments");
+
+      var comment = $("#comment").val();
+      comments.push({
+         user_id: nyuad.id,
+         name: nyuad.name,
+         comment: comment
+      });
+
+      this.model.set("comments", comments);
       this.render();
    }
 });
