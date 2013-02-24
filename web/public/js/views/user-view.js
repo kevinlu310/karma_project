@@ -10,7 +10,7 @@ nyuad.Views.UserView = Backbone.View.extend({
    },
 
    render: function () {
-      this.el.html(this.model.toJSON());
+      this.$el.html(this.model.toJSON());
       return this;
    },
 

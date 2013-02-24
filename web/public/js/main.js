@@ -1,3 +1,9 @@
+_.templateSettings = {
+    interpolate: /\<\@\=(.+?)\@\>/gim,
+    evaluate: /\<\@(.+?)\@\>/gim,
+    escape: /\<\@\-(.+?)\@\>/gim
+};
+
 window.nyuad = {
    Models: {},
    Collections: {},

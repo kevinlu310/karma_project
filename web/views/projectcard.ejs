@@ -1,8 +1,28 @@
+<!--
+
+{
+    "ID": 3,
+    "Title": "School yard clearningg",
+    "Description": "help make our school green! join community good people to clean the english school yard at Abu Dhabi",
+    "Picture": "http://distilleryimage0.s3.amazonaws.com/ba34c7be483611e297b922000a1fa527_7.jpg",
+    "Owner ID": 4,
+    "Funding": 45,
+    "tstamp": "2013-02-23T11:37:49.000Z",
+    "user_count": null,
+    "task_count": 1,
+    "Current_Fund": null,
+    "task_notassigned": null
+  } ,
+
+ -->
+
+
+
 <script type="text/template" id="project-card-template">
     <div class="thumbnail">
-        <img src="http://saarc-smrc.org/images/noimage.jpg" alt="Project Thumbnail"/>
-        <h3 class="text-error">Project Title</h3>
-        <p class="text-info">Some Text...Some Text...Some Text...Some Text...Some Text...Some Text...Some Text...Some Text...Some Text...Some Text...</p>
+        <img src="<@- Picture @>" alt="Project Thumbnail"/>
+        <h3 class="text-error"><@-Title@></h3>
+        <p class="text-info"> <@-Description@> </p>
         <!-- bars for each project card-->
         <p>Funding <div class="progress progress-info progress-striped">
             <div class="bar" style="width: 30%;"></div>
@@ -11,7 +31,7 @@
             <div class="bar" style="width: 50%;"></div>
         </div></p>
 
-        <p><a href="#" class="btn btn-info">Explore</a></p>
+        <p><a href="#" class="btn btn-info explore">Explore</a></p>
 
     </div>
 </script>

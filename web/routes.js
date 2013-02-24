@@ -131,7 +131,10 @@ exports.attach = function attachRoutes(app) {
       executeQuery(db, "SELECT * FROM (SELECT project.* , UC.user_count, TC.task_count, UC.Current_Fund, NTC.task_notassigned FROM project LEFT JOIN ( SELECT `Project ID` , COUNT( `User ID` ) AS user_count, SUM( `FundingAmount` ) AS Current_Fund FROM project_user_fund GROUP BY `Project ID`) AS UC ON project.ID = UC.`Project ID` LEFT JOIN ( SELECT `Project ID` , COUNT( `Task ID` ) AS task_count FROM project_task_user GROUP BY `Project ID`) AS TC ON project.ID = TC.`Project ID` LEFT JOIN (SELECT `Project ID` , COUNT( `Task ID` ) AS task_notassigned FROM project_task_user WHERE `User ID` IS NULL GROUP BY `Project ID` ) AS NTC ON project.ID = NTC.`Project ID`  ORDER BY tstamp DESC) AS T LIMIT 3", function(err, rows, fields) {
          var users = [];
          if(!err && rows.length !== 0) {
+            console.log("no error!");
             users = rows;
+         } else {
+            console.log("error!", err);
          }
          db.end();
          res.send(users);

@@ -1,5 +1,5 @@
 nyuad.Views.ProjectView = Backbone.View.extend({
-   el: $("#main-content"),
+   el: "#main-content",
 
    template: _.template($("#project-view-template").html()),
 
@@ -13,7 +13,7 @@ nyuad.Views.ProjectView = Backbone.View.extend({
    },
 
    render: function () {
-      this.el.html(this.template(this.model.toJSON()));
+      this.$el.html(this.template(this.model.toJSON()));
       return this;
    }
 });
