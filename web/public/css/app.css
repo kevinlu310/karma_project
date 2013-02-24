@@ -22,7 +22,7 @@ h1 {
 }
 
 #hero-unit-header{
-	color:white;
+	color: white;
 }
 
 #hero-unit-subtext{
@@ -32,4 +32,7 @@ h1 {
 #profile-img{
 	height: 200px;
 	width: 100%;
+	border-style: solid;
+	border-width: 3px;
+	border-color: navy;
 }
