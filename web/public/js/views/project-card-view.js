@@ -16,6 +16,6 @@ nyuad.Views.ProjectCard = Backbone.View.extend({
    },
 
    openProject: function(){
-      this.navigate("projects/" + model.id);
+      nyuad.navigate("projects/" + this.model.id, true);
    }
 });
