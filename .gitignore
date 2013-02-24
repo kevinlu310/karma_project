@@ -3,3 +3,4 @@ server/phprestsql.ini
 node_modules/
 npm-debug.log
 setup.sh
+*.swp
