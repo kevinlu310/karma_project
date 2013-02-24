@@ -28,7 +28,7 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
 
     createProject: function(){
         console.log("im hereeeee");
-        new nyuad.Views.ProjectCreate();
+        new nyuad.Views.ProjectCreate({model: new nyuad.Models.Project()});
     },
 
     projects: function(id) {
