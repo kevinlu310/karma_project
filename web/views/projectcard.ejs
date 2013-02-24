@@ -25,10 +25,10 @@
         <p class="text-info"> <@-description@> </p>
         <!-- bars for each project card-->
         <p>Funding <div class="progress progress-info progress-striped">
-            <div class="bar" style="width: 30%;"></div>
+            <div class="bar" style="width: <@- funding_percent @>%;"></div>
         </div></p>
         <p>Tasks <div class="progress progress-warning progress-striped">
-            <div class="bar" style="width: 50%;"></div>
+            <div class="bar" style="width: <@- task_percent @>%;"></div>
         </div></p>
 
         <p><a href="#" class="btn btn-info explore">Explore</a></p>
