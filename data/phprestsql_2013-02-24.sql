@@ -134,9 +134,9 @@ LOCK TABLES `project_comments` WRITE;
 
 INSERT INTO `project_comments` (`project_id`, `user_id`, `comment`)
 VALUES
-	(0,1,1,'Count me in !'),
-	(1,1,3,'The project seems pretty interesting. Can I donate my brushes ?'),
-	(2,2,2,'whatever');
+	(1,1,'Count me in !'),
+	(1,3,'The project seems pretty interesting. Can I donate my brushes ?'),
+	(2,2,'whatever');
 
 /*!40000 ALTER TABLE `project_comments` ENABLE KEYS */;
 UNLOCK TABLES;
