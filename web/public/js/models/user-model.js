@@ -9,6 +9,18 @@ nyuad.Models.User = Backbone.Model.extend({
    initialize: function() {
       // Do something
       console.log("Hello User");
+      this.calculateTotalFunding();
+      this.calculateTotalTasks();
+   },
+
+   calculateTotalTasks: function () {
+      
+
+   },
+
+   calculateTotalFunding: function(){
+      var fund_count = this.get("funded_projects").length;
+      console.log("fund_count=" + fund_count);
    },
 
    validate: function() {

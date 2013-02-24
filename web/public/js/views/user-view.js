@@ -7,7 +7,8 @@ nyuad.Views.UserView = Backbone.View.extend({
    },
 
    initialize: function () {
-      this.render();
+      this.listenTo(this.model, "change", this.render);
+      this.model.fetch();
    },
 
    render: function () {
