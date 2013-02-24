@@ -13,8 +13,8 @@ window.nyuad = {
       new nyuad.Routers.ApplicationRouter();
       Backbone.history.start();
       console.log("Hello from Karma Project");
-   
-      $("[data-href]").on("click", function(e) {
+
+      $(document).on("click", "[data-href]", function(e) {
         e.preventDefault();
         Backbone.history.navigate($(this).closest("[data-href]").attr("href"), {trigger: true});
       })

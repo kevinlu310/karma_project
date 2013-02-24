@@ -6,7 +6,7 @@ nyuad.Models.Project = Backbone.Model.extend({
       "description": "Lorem Ipsumify this",
       "picture": "https://upload.wikimedia.org/wikipedia/en/0/0d/Null.png",
       "funding": 0,
-      "owner": 0,
+      "owner_id": 0,
       "funding_percent": 0,
       "task_percent": 0,
       "current_fund": 0,
