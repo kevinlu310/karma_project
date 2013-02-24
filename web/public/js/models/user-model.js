@@ -16,7 +16,6 @@ nyuad.Models.User = Backbone.Model.extend({
    calculate: function () {
       var funds = this.get("funded_projects") || [];
       var tasks = this.get("tasks_projects") || [];
-
       var total_tasks = tasks.length;
       var total_funds = 0;
       _.each(funds, function(fund) {
@@ -28,8 +27,8 @@ nyuad.Models.User = Backbone.Model.extend({
    },
 
    calculateTotalFunding: function(){
-      var fund_count = this.get("funded_projects").length;
-      console.log("fund_count=" + fund_count);
+      //var fund_count = this.get("funded_projects").length;
+      //console.log("fund_count=" + fund_count);
    },
 
    validate: function() {
