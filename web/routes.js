@@ -149,7 +149,7 @@ exports.attach = function attachRoutes(app) {
             }
 
             //getting performed tasks
-            executeQuery(db, "SELECT project.`title`, project.`id`, project_task_user.`task_id` FROM `project_task_user` JOIN project ON project.`id`=project_task_user.`project_id` WHERE project_task_user.`user_id`=" + req.params.id, function(err, rows3, fields2) {
+            executeQuery(db, "SELECT project.`title`, project.`id`, project_task_user.`task_id`, UT.task_title FROM `project_task_user` JOIN project ON project.`id`=project_task_user.`project_id` JOIN (SELECT task.id, task.`title` As task_title FROM task) AS UT ON project_task_user.`task_id` = UT.`id` WHERE project_task_user.`user_id`=" + req.params.id, function(err, rows3, fields2) {
                if(!err && rows3.length !== 0) {
                   users.tasks_projects = rows3;
                }
