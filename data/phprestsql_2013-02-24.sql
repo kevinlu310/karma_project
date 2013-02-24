@@ -26,7 +26,7 @@
 DROP TABLE IF EXISTS `project`;
 
 CREATE TABLE `project` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text CHARACTER SET latin1 NOT NULL,
   `description` text CHARACTER SET latin1 NOT NULL,
   `picture` text CHARACTER SET latin1 NOT NULL,
@@ -59,7 +59,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `project_task_user`;
 
 CREATE TABLE `project_task_user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
   `task_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -91,7 +91,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `project_user_fund`;
 
 CREATE TABLE `project_user_fund` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `funding_amount` int(11) NOT NULL,
@@ -123,7 +123,9 @@ CREATE TABLE `project_comments` (
   `project_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `comment` text NOT NULL,
-  PRIMARY KEY (`project_id`,`user_id`)
+  PRIMARY KEY (`project_id`,`user_id`),
+  CONSTRAINT `project_comments_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `project_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `project_comments` WRITE;
@@ -145,7 +147,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `task`;
 
 CREATE TABLE `task` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(30) NOT NULL,
   `resource_num` int(11) NOT NULL,
   `karma` int(11) NOT NULL,
