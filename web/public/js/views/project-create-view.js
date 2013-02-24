@@ -15,11 +15,17 @@ nyuad.Views.ProjectCreate = Backbone.View.extend({
    },
 
    doSave: function (event) {
-      var title = $("#projectTitle");
-      var description = $("#description");
-      var fundNeeded = $("#fundNeeded");
-      var img = $("#imgThumbnail");
+      var title = $("#projectTitle").val();
+      var description = $("#description").val();
+      var fundNeeded = $("#fundNeeded").val();
+      var img = $("#imgThumbnail").val();
 
+      console.log({
+         title: title,
+         desc: description,
+         fund: fundNeeded,
+         img: img
+      });
 
    }
 
