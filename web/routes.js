@@ -21,6 +21,7 @@ function executeQuery(db, sql, callback) {
 
 function findOrCreateUser(app, profile){
     var db = connectDB (app);
+    console.log("FIND ID", profile.id);
     db.query("select * From user where id = ? ", [profile.id], function(err, results){
         var isFound = !err && results.length>0;
         if (!isFound) {
