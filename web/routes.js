@@ -200,7 +200,7 @@ exports.attach = function attachRoutes(app) {
          }
 
          //getting contributers
-         executeQuery(db, "SELECT T.name FROM ((SELECT user.`id`, user.`name` FROM user JOIN `project_user_fund` ON user.`id`=project_user_fund.`user_id` AND project_user_fund.`project_id` = " + req.params.id + ") UNION DISTINCT (SELECT user.`id`, user.`name` FROM user JOIN `project_task_user` ON user.`id`=project_task_user.`user_id` AND project_task_user.`project_id` = " + req.params.id + ") ) AS T", function(err, rows2, fields2) {
+         executeQuery(db, "SELECT T.id AS user_id, T.name FROM ((SELECT user.`id`, user.`name` FROM user JOIN `project_user_fund` ON user.`id`=project_user_fund.`user_id` AND project_user_fund.`project_id` = " + req.params.id + ") UNION DISTINCT (SELECT user.`id`, user.`name` FROM user JOIN `project_task_user` ON user.`id`=project_task_user.`user_id` AND project_task_user.`project_id` = " + req.params.id + ") ) AS T", function(err, rows2, fields2) {
             if(!err && rows2.length !== 0) {
                users.contributing_users = rows2;
             }
@@ -212,7 +212,7 @@ exports.attach = function attachRoutes(app) {
                }
 
                //getting comments
-               executeQuery(db, "SELECT user.`name`, T.`comment` FROM user JOIN (SELECT comment, `user_id` FROM `project_comments` WHERE `project_id` =" + req.params.id + " ) AS T ON T.`user_id` = user.`id`", function(err, rows4, fields2) {
+               executeQuery(db, "SELECT user.id AS user_id, user.`name`, T.`comment` FROM user JOIN (SELECT comment, `user_id` FROM `project_comments` WHERE `project_id` =" + req.params.id + " ) AS T ON T.`user_id` = user.`id`", function(err, rows4, fields2) {
                   if(!err && rows4.length !== 0) {
                      users.comments = rows4;
                   }
