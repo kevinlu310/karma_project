@@ -5,7 +5,8 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
         "index": "index",
         "users/:id": "users",
         "projects/": "projects",
-        "projects/:id": "projects"
+        "projects/:id": "projects",
+        "about":"about"
     },
 
     index: function() {
@@ -32,5 +33,10 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
             console.log("Asked for project listing");
             new nyuad.Views.ProjectListing();
         }
-    }
+    },
+
+    about: function() {
+        new nyuad.Views.AboutView();
+    },
+
 });
