@@ -19,30 +19,53 @@ function executeQuery(db, sql, callback) {
 }
 
 
+function findOrCreateUser(app, profile){
+    var db = connectDB (app);
+    db.query("select * From user where id = ? ", [profile.id], function(err, results){
+        var isFound = !err && results.length>0;
+        if (!isFound) {
+            db.query("insert into user SET ?", 
+            {
+                "ID": profile.id,
+                "Name":profile.displayName, 
+                "userpicture": "http://graph.facebook.com/" + profile.id + "/picture",
+            }, function (err, result) {
+                console.log("ERR", err, result);
+            });
+        } else {
+            console.log("Found user");
+        }
+        db.end();
+    });
+
+}
+
 function attachAuth(app) {
-   app.use(passport.initialize());
-   app.use(passport.session());
-   passport.use(new FacebookStrategy({
-      clientID: '214934941983073',
-      clientSecret: '8a1777522998b540e49f5e25cce75c86',
-      callbackURL: 'http://thekarmaproject.com:3000/auth/facebook/callback'
-   }, function(accessToken, refreshToken, profile, done) {
-      console.log("auth", done, profile.id);
-      done(null, profile);
-   }));
 
-   passport.serializeUser(function(user, done) {
-      console.log("USER SERIALIZE", user);
-      done(null, {
-         id: user.id,
-         name: user.displayName
-      });
-   });
+    app.use(passport.initialize());
+    app.use(passport.session());
+    passport.use(new FacebookStrategy({
+        clientID: '214934941983073',
+        clientSecret: '8a1777522998b540e49f5e25cce75c86',
+        callbackURL: 'http://thekarmaproject.com:3000/auth/facebook/callback'
+    }, function (accessToken, refreshToken, profile, done){
+        console.log("auth", done, profile.id);
+        findOrCreateUser(app, profile);
+        done(null, profile);
+    }));
 
-   passport.deserializeUser(function(id, done) {
-      console.log("USER DESERIALIZE", id);
-      done(null, id);
-   });
+    passport.serializeUser(function (user, done){
+        console.log("USER SERIALIZE", user);
+        done(null, {
+            id: user.id,
+            name: user.displayName
+        });
+    });
+
+    passport.deserializeUser(function(id, done){
+        console.log("USER DESERIALIZE", id);
+        done(null, id);
+    });   
 }
 
 
