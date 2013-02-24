@@ -71,7 +71,33 @@ function attachAuth(app) {
 
 exports.attach = function attachRoutes(app) {
    attachAuth(app);
+   
+   
+   app.post('/api/projects',function(req, res) {
+	   var project_title = req.body.projectTitle,
+	   	   description = req.body.description,
+	   	   fund_needed = req.body.fundNeeded,
+	   	   thumbnail = req.body.imgThumbnail,
+	   	   owner_id = req.user;
+	   	   
+	   if (typeof owner_id != "undefined"){
+			res.send("{error: 'user is undefined'}");	
+			return;	   
+	   }
+   	   
+       var db = connectDB(app);
 
+	   var query = db.query(
+			'INSERT INTO project '+
+			'SET title = ?, description = ?, funding = ?, picture = ?, `owner_id`= '+owner_id,
+			[ project_title, description, fund_needed, thumbnail], function(err, rows, fields) {
+			
+
+			db.end();
+			res.send(rows);
+	   });
+
+   });
 
    app.get('/', function(req, res) {
       console.log("USER", req.user);
