@@ -37,6 +37,7 @@
                 
                 <li class="span4">
                     <h3>Projects Contributed Money For</h3>
+                    <@ if (total_funds) { @>
                     <table class="table table-striped">
                     	<thead>
                     		<tr><th class="span4">Project</th><th class="span8">Money</th></tr>
@@ -44,10 +45,14 @@
                         <tbody id="funds-list">
                         </tbody>
                     </table>
+                    <@  } else{ @>
+                    <p>No Funds :(</p>
+                    <@ } @>
                 </li>
 
                 <li class="span6">
                     <h3>Projects Previously Worked On</h3>
+                    <@ if (total_tasks) { @>
                     <table class="table table-striped">
                     <thead>
                     	<tr><th class="span4">Project</th><th class="span8">Task</th></tr>
@@ -55,6 +60,9 @@
                     <tbody id="user-tasks-list">
                        </tbody>
                     </table>
+                     <@  } else{ @>
+                    <p>No Tasks Done :(</p>
+                    <@ } @>
                 </li>
 
             </ul>
