@@ -7,12 +7,21 @@ nyuad.Views.ProjectView = Backbone.View.extend({
       // Stuff
    },
 
-   initialize: function () {
+   initialize: function() {
       this.listenTo(this.model, "change", this.render);
+
       this.model.fetch();
+
+      var user_model = new nyuad.Models.User({
+         id: this.model.get("owner")
+      });
+
+      user_model.fetch();
+
+      this.model.set("owner_model", user_model.toJSON());
    },
 
-   render: function () {
+   render: function() {
       this.$el.html(this.template(this.model.toJSON()));
       return this;
    }
