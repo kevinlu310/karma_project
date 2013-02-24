@@ -18,8 +18,8 @@ function executeQuery(db, sql, callback) {
 	db.query(sql, callback);
 }
 
-function attachAuth(app) {
 
+function attachAuth(app) {
     app.use(passport.initialize());
     app.use(passport.session());
     passport.use(new FacebookStrategy({
@@ -43,8 +43,8 @@ function attachAuth(app) {
         console.log("USER DESERIALIZE", id);
         done(null, id);
     });   
-
 }
+
 
 exports.attach = function attachRoutes(app) {
     attachAuth(app);
@@ -112,12 +112,20 @@ exports.attach = function attachRoutes(app) {
 
 
     app.get('/api/projects', function (req, res) {
-        res.send('users');
+		var db = connectDB (app);
+    	executeQuery(db, "SELECT project.* , UC.user_count, TC.task_count, UC.Current_Fund, NTC.task_notassigned FROM project LEFT JOIN ( SELECT `Project ID` , COUNT( `User ID` ) AS user_count, SUM( `FundingAmount` ) AS Current_Fund FROM project_user_fund GROUP BY `Project ID`) AS UC ON project.ID = UC.`Project ID` LEFT JOIN ( SELECT `Project ID` , COUNT( `Task ID` ) AS task_count FROM project_task_user GROUP BY `Project ID`) AS TC ON project.ID = TC.`Project ID` LEFT JOIN (SELECT `Project ID` , COUNT( `Task ID` ) AS task_notassigned FROM project_task_user WHERE `User ID` IS NULL GROUP BY `Project ID` ) AS NTC ON project.ID = NTC.`Project ID`", function(err, rows, fields) {
+			var users = [];
+			if (!err && rows.length !== 0) {
+				users = rows;
+			}
+			db.end();
+	    	res.send(users);
+		});
     });
 
     app.get('/api/recent_projects', function (req, res) {
 		var db = connectDB (app);
-    	executeQuery(db, "SELECT T.`ID` FROM (SELECT `project`.`ID` FROM project ORDER BY tstamp DESC) AS T LIMIT 3", function(err, rows, fields) {
+    	executeQuery(db, "SELECT * FROM (SELECT project.* , UC.user_count, TC.task_count, UC.Current_Fund, NTC.task_notassigned FROM project LEFT JOIN ( SELECT `Project ID` , COUNT( `User ID` ) AS user_count, SUM( `FundingAmount` ) AS Current_Fund FROM project_user_fund GROUP BY `Project ID`) AS UC ON project.ID = UC.`Project ID` LEFT JOIN ( SELECT `Project ID` , COUNT( `Task ID` ) AS task_count FROM project_task_user GROUP BY `Project ID`) AS TC ON project.ID = TC.`Project ID` LEFT JOIN (SELECT `Project ID` , COUNT( `Task ID` ) AS task_notassigned FROM project_task_user WHERE `User ID` IS NULL GROUP BY `Project ID` ) AS NTC ON project.ID = NTC.`Project ID`  ORDER BY tstamp DESC) AS T LIMIT 3", function(err, rows, fields) {
 			var users = [];
 			if (!err && rows.length !== 0) {
 				users = rows;
@@ -130,7 +138,7 @@ exports.attach = function attachRoutes(app) {
     app.get('/api/projects/:id', function (req, res) {
 		var db = connectDB (app);
 		var users = {};
-    	executeQuery(db, "SELECT * FROM project WHERE ID="+req.params.id, function(err, rows, fields) {
+    	executeQuery(db, "SELECT project.* , UC.user_count, TC.task_count, UC.Current_Fund, NTC.task_notassigned FROM project LEFT JOIN ( SELECT `Project ID` , COUNT( `User ID` ) AS user_count, SUM( `FundingAmount` ) AS Current_Fund FROM project_user_fund GROUP BY `Project ID`) AS UC ON project.ID = UC.`Project ID` LEFT JOIN ( SELECT `Project ID` , COUNT( `Task ID` ) AS task_count FROM project_task_user GROUP BY `Project ID`) AS TC ON project.ID = TC.`Project ID` LEFT JOIN (SELECT `Project ID` , COUNT( `Task ID` ) AS task_notassigned FROM project_task_user WHERE `User ID` IS NULL GROUP BY `Project ID` ) AS NTC ON project.ID = NTC.`Project ID` WHERE ID="+req.params.id, function(err, rows, fields) {
 			if (!err && rows.length !== 0) {
 				users = rows[0];
 			}
@@ -138,7 +146,7 @@ exports.attach = function attachRoutes(app) {
 			//getting contributers
 			executeQuery(db, "SELECT T.Name FROM ((SELECT user.`ID`, user.`Name` FROM user JOIN `project_user_fund` ON user.`ID`=project_user_fund.`User ID` AND project_user_fund.`Project ID` = "+req.params.id+") UNION DISTINCT (SELECT user.`ID`, user.`Name` FROM user JOIN `project_task_user` ON user.`ID`=project_task_user.`User ID` AND project_task_user.`Project ID` = "+req.params.id+") ) AS T", function(err, rows2, fields2) {
 				if (!err && rows2.length !== 0) {
-					users.funded_projects = rows2;
+					users.contributing_users = rows2;
 				}
 				
 				//getting Tasks
@@ -147,8 +155,16 @@ exports.attach = function attachRoutes(app) {
 						users.tasks_projects = rows3;
 					}
 
-					db.end();
-					res.send(users);
+					//getting Comments
+					executeQuery(db, "SELECT user.`Name`, T.`Comment` FROM user JOIN (SELECT Comment, `User ID` FROM `projectcomments` WHERE `Project ID` ="+req.params.id+" ) AS T ON T.`User ID` = user.`ID`", function(err, rows4, fields2) {
+						if (!err && rows4.length !== 0) {
+							users.comments = rows4;
+						}
+	
+						db.end();
+						res.send(users);
+					});
+
 				});
 			});
 
