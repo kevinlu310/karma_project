@@ -143,13 +143,13 @@ exports.attach = function attachRoutes(app) {
          }
 
          //getting funded projects
-         executeQuery(db, "SELECT project.`title`, `project_user_fund`.`funding_amount` FROM user JOIN project_user_fund ON user.`id`=project_user_fund.`user_id` JOIN project ON user.`id`=project_user_fund.`user_id` AND project_user_fund.`project_id`=project.`id` WHERE user.id=" + req.params.id, function(err, rows2, fields2) {
+         executeQuery(db, "SELECT project.`title`, project.`id`, `project_user_fund`.`funding_amount` FROM user JOIN project_user_fund ON user.`id`=project_user_fund.`user_id` JOIN project ON user.`id`=project_user_fund.`user_id` AND project_user_fund.`project_id`=project.`id` WHERE user.id=" + req.params.id, function(err, rows2, fields2) {
             if(!err && rows2.length !== 0) {
                users.funded_projects = rows2;
             }
 
             //getting performed tasks
-            executeQuery(db, "SELECT project.`title`, project_task_user.`task_id` FROM `project_task_user` JOIN project ON project.`id`=project_task_user.`project_id` WHERE project_task_user.`user_id`=" + req.params.id, function(err, rows3, fields2) {
+            executeQuery(db, "SELECT project.`title`, project.`id`, project_task_user.`task_id` FROM `project_task_user` JOIN project ON project.`id`=project_task_user.`project_id` WHERE project_task_user.`user_id`=" + req.params.id, function(err, rows3, fields2) {
                if(!err && rows3.length !== 0) {
                   users.tasks_projects = rows3;
                }
