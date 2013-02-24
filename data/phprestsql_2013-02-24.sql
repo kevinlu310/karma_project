@@ -120,11 +120,10 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `project_comments`;
 
 CREATE TABLE `project_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
   `user_id` bigint(11) NOT NULL,
   `comment` text NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`project_id`,`user_id`),
   CONSTRAINT `project_comments_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
   CONSTRAINT `project_comments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
