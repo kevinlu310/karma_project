@@ -49,17 +49,5 @@ nyuad.Models.Project = Backbone.Model.extend({
 
       console.log("fund percent = " + result);
       this.set("funding_percent", result);
-   },
-
-   validate: function() {
-      if(!attr["title"]) {
-         return "Your project must have a title.";
-      }
-      if(!attr["description"]) {
-         return "Your project must have a description.";
-      }
-      if(!attr["image_url"]) {
-         return "Your project must have an image.";
-      }
    }
 });
