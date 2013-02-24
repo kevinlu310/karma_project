@@ -26,28 +26,28 @@
 DROP TABLE IF EXISTS `project`;
 
 CREATE TABLE `project` (
-  `ID` int(11) NOT NULL,
-  `Title` text CHARACTER SET latin1 NOT NULL,
-  `Description` text CHARACTER SET latin1 NOT NULL,
-  `Picture` text CHARACTER SET latin1 NOT NULL,
-  `Owner ID` int(11) NOT NULL,
-  `Funding` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `title` text CHARACTER SET latin1 NOT NULL,
+  `description` text CHARACTER SET latin1 NOT NULL,
+  `picture` text CHARACTER SET latin1 NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `funding` int(11) NOT NULL,
   `tstamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ID`),
-  KEY `Owner ID` (`Owner ID`),
-  KEY `Owner ID_2` (`Owner ID`),
-  CONSTRAINT `project_ibfk_1` FOREIGN KEY (`Owner ID`) REFERENCES `user` (`ID`) ON DELETE CASCADE
+  PRIMARY KEY (`id`),
+  KEY `owner_id` (`owner_id`),
+  KEY `owner_id_2` (`owner_id`),
+  CONSTRAINT `project_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `project` WRITE;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
 
-INSERT INTO `project` (`ID`, `Title`, `Description`, `Picture`, `Owner ID`, `Funding`, `tstamp`)
+INSERT INTO `project` (`id`, `title`, `description`, `picture`, `owner_id`, `funding`, `tstamp`)
 VALUES
 	(0,'Art fair','support creativity by helping us organize the next coming art fair at Al Saadiat island ! ','http://distilleryimage8.s3.amazonaws.com/25caa47c1c8a11e2b3ea12313813ffc5_7.jpg',1,500,'2013-02-23 15:34:04'),
 	(1,'House maintenance ','A House of a small family at Abu Dhabi Sheikh Zayed street in need for maintenance. Join us on this humanitarian mission','http://distilleryimage9.s3.amazonaws.com/ae96dcd89aff11e180c9123138016265_6.jpg',1,300,'2013-02-23 15:34:04'),
 	(2,'Construction site','Labor forces needed at Massafeh district for building new factory building','http://distilleryimage0.s3.amazonaws.com/bc13c1a6f8dc11e19b6b22000a1e9e0a_6.jpg',2,1460,'2013-02-23 15:34:04'),
-	(3,'School yard clearningg','help make our school green! join community good people to clean the english school yard at Abu Dhabi','http://distilleryimage0.s3.amazonaws.com/ba34c7be483611e297b922000a1fa527_7.jpg',4,45,'2013-02-23 15:37:49');
+	(3,'School yard clearning','help make our school green! join community good people to clean the english school yard at Abu Dhabi','http://distilleryimage0.s3.amazonaws.com/ba34c7be483611e297b922000a1fa527_7.jpg',4,45,'2013-02-23 15:37:49');
 
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -59,21 +59,21 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `project_task_user`;
 
 CREATE TABLE `project_task_user` (
-  `ID` int(11) NOT NULL,
-  `Project ID` int(11) NOT NULL,
-  `Task ID` int(11) NOT NULL,
-  `User ID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `User ID` (`User ID`),
-  KEY `Task ID` (`Task ID`),
-  CONSTRAINT `project_task_user_ibfk_1` FOREIGN KEY (`User ID`) REFERENCES `user` (`ID`) ON DELETE CASCADE,
-  CONSTRAINT `project_task_user_ibfk_2` FOREIGN KEY (`Task ID`) REFERENCES `task` (`ID`) ON DELETE CASCADE
+  `id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `task_id` (`task_id`),
+  CONSTRAINT `project_task_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `project_task_user_ibfk_2` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `project_task_user` WRITE;
 /*!40000 ALTER TABLE `project_task_user` DISABLE KEYS */;
 
-INSERT INTO `project_task_user` (`ID`, `Project ID`, `Task ID`, `User ID`)
+INSERT INTO `project_task_user` (`id`, `project_id`, `task_id`, `user_id`)
 VALUES
 	(1,1,1,1),
 	(2,1,2,2),
@@ -91,19 +91,19 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `project_user_fund`;
 
 CREATE TABLE `project_user_fund` (
-  `ID` int(11) NOT NULL,
-  `Project ID` int(11) NOT NULL,
-  `User ID` int(11) NOT NULL,
-  `FundingAmount` int(11) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `User ID` (`User ID`),
-  CONSTRAINT `project_user_fund_ibfk_1` FOREIGN KEY (`User ID`) REFERENCES `user` (`ID`) ON DELETE CASCADE
+  `id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `funding_amount` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `project_user_fund_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `project_user_fund` WRITE;
 /*!40000 ALTER TABLE `project_user_fund` DISABLE KEYS */;
 
-INSERT INTO `project_user_fund` (`ID`, `Project ID`, `User ID`, `FundingAmount`)
+INSERT INTO `project_user_fund` (`id`, `project_id`, `user_id`, `funding_amount`)
 VALUES
 	(1,1,1,20),
 	(2,1,3,30),
@@ -114,28 +114,28 @@ VALUES
 UNLOCK TABLES;
 
 
-# Dump of table projectcomments
+# Dump of table project_comments
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `projectcomments`;
+DROP TABLE IF EXISTS `project_comments`;
 
-CREATE TABLE `projectcomments` (
-  `Project ID` int(11) NOT NULL,
-  `User ID` int(11) NOT NULL,
-  `Comment` text NOT NULL,
-  PRIMARY KEY (`Project ID`,`User ID`)
+CREATE TABLE `project_comments` (
+  `project_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `comment` text NOT NULL,
+  PRIMARY KEY (`project_id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `projectcomments` WRITE;
-/*!40000 ALTER TABLE `projectcomments` DISABLE KEYS */;
+LOCK TABLES `project_comments` WRITE;
+/*!40000 ALTER TABLE `project_comments` DISABLE KEYS */;
 
-INSERT INTO `projectcomments` (`Project ID`, `User ID`, `Comment`)
+INSERT INTO `project_comments` (`project_id`, `user_id`, `comment`)
 VALUES
 	(1,1,'Count me in !'),
 	(1,3,'The project seems pretty interesting. Can I donate my brushes ?'),
 	(2,2,'whatever');
 
-/*!40000 ALTER TABLE `projectcomments` ENABLE KEYS */;
+/*!40000 ALTER TABLE `project_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -145,17 +145,17 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `task`;
 
 CREATE TABLE `task` (
-  `ID` int(11) NOT NULL,
-  `Title` varchar(30) NOT NULL,
-  `Resources Num` int(11) NOT NULL,
-  `Karma` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
+  `id` int(11) NOT NULL,
+  `title` varchar(30) NOT NULL,
+  `resource_num` int(11) NOT NULL,
+  `karma` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
 
-INSERT INTO `task` (`ID`, `Title`, `Resources Num`, `Karma`)
+INSERT INTO `task` (`id`, `title`, `resource_num`, `karma`)
 VALUES
 	(1,'invitation designing',2,1),
 	(2,'paintings hanging',5,2),
@@ -171,23 +171,23 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
-  `ID` int(11) NOT NULL,
-  `Name` mediumtext NOT NULL,
-  `Karma` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `name` mediumtext NOT NULL,
+  `karma` int(11) NOT NULL,
   `userpicture` text NOT NULL,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 
-INSERT INTO `user` (`ID`, `Name`, `Karma`, `userpicture`)
+INSERT INTO `user` (`id`, `name`, `karma`, `userpicture`)
 VALUES
 	(1,'Ahmed',2,'http://www.thenational.ae/deployedfiles/Assets/Richmedia/Image/AD200910712119896AR.jpg'),
 	(2,'John',11,'http://images.askmen.com/sports/keywords/personal-trainer_965841.jpg'),
 	(3,'Mia',3,'http://www.sca.com/PageFiles/15/sca-personal-care-2011.jpg?epslanguage=en'),
 	(4,'Paul',15,'http://www.wired.com/images_blogs/gadgetlab/2009/07/js-personal-supercomputer.jpg'),
-	(5,'Mary',22,'http://womantalks.com/var/ezflow_site/storage/images/wd2/content/money/saving-money/top-5-personal-finance-resources-online/638048-1-eng-US/Top-5-Personal-Finance-Resources-Online_full_article_vertical.jpg');
+	(5,'Mary',22,'http://womantalks.com/var/ezflow_site/storage/images/wd2/content/money/saving-money/top-5-personal-finance-resource_numine/638048-1-eng-US/Top-5-Personal-Finance-resource_numine_full_article_vertical.jpg');
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;

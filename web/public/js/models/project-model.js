@@ -6,12 +6,13 @@ nyuad.Models.Project = Backbone.Model.extend({
       "description": "Lorem Ipsumify this",
       "picture": "https://upload.wikimedia.org/wikipedia/en/0/0d/Null.png",
       "funding": 0,
-      "owner": 0
+      "owner": 0,
+      "funding-percent": 0,
+      "task-percent": 0
    },
 
    initialize: function() {
-      // Do something
-      console.log("Hello Project");
+
    },
 
    validate: function() {
@@ -23,6 +24,9 @@ nyuad.Models.Project = Backbone.Model.extend({
       }
       if(!attr["image_url"]) {
          return "Your project must have an image.";
+      }
+      if(!attr["Current-Fund"]){
+         console.log("Current-Fund is null");
       }
    }
 });
