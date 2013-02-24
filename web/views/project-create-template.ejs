@@ -1,0 +1,110 @@
+<script type="text/template" id="project-create-template">
+
+<div class="container-fluid">
+    <div class="page-header">
+        <h1>Create a New Project</h1>
+    </div>
+    <div class="row-fluid">
+        <form action="" method="POST">
+            <fieldset>
+                <legend>New Project Form</legend>
+                <div class="row-fluid"><div class="container pull-left">
+                    <label class="span2">Project Title: </label>
+                    <input class="span3" type="text" id="projectTitle">
+                </div></div>
+
+                <div class="row-fluid"><div class="container pull-left">
+                    <label class="span2">Description: </label>
+                    <input class="span3" type="text" id="description">
+                </div></div>
+
+                <div class="row-fluid"><div class="container pull-left">
+                    <label class="span2">Total Fund Needed: </label>
+                    <input class="span3" type="text" id="fundNeeded">
+                </div></div>
+
+                <div class="row-fluid"><div class="container pull-left">
+                    <label class="span2">Thumbnail URL: </label>
+                    <input class="span3" type="text" id="imgThumbnail">
+                </div></div>
+
+                <div class="row-fluid"><div class="container pull-left">
+                    <h3>Tasks</h3>
+                </div></div>
+
+                <div class="row-fluid">
+                    <div class="container-fluid">
+                        <a href="#taskModal" role="button" class="btn btn-primary" data-toggle="modal">Add a Task</a>
+
+                        <div id="taskModal" class="modal hide fade">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3>Add a Task</h3>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row-fluid"><div class="container pull-left">
+                                    <label class="span2">Task: </label>
+                                    <input class="span3" type="text" id="taskTitle">
+                                </div></div>
+
+                                <div class="row-fluid"><div class="container pull-left">
+                                    <label class="span2">Resources: </label>
+                                    <input class="span3" type="text" id="resources">
+                                </div></div>
+
+                                <div class="row-fluid"><div class="container pull-left">
+                                    <label class="span2">Karma Points: </label>
+                                    <input class="span3" type="text" id="karma">
+                                </div></div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" class="btn btn-danger">Reset</a>
+                                <a href="#" class="btn btn-primary">Add</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="row-fluid"><div class="container-fluid">
+                    <p></p>
+                    <table class="table table-striped">
+                            <tbody><tr>
+                                <th class="span4">Task</th>
+                                <th class="span4">Resources</th>
+                                <th class="span2">Karma Points</th>
+                                <th class="span2"> </th>
+                            </tr>
+                            <tr>
+                                <td class="span10">Task1</td>
+                                <td></td>
+                                <td class=""></td>
+                                <td class="span2"><button class="btn btn-mini btn-danger" type="button">Delete Task</button></td>
+                            </tr>
+
+                        </tbody></table>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <div class="row-fluid text-center">
+                    <button class="btn btn-danger" type="button">Reset</button>
+                    <button class="btn btn-primary" type="Submit">Publish Project</button>
+                </div>
+
+
+
+
+
+
+            </fieldset>
+
+        </form>
+
+    </div>
+</div>
+
+</script>
