@@ -4,9 +4,10 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
         "": "index",
         "index": "index",
         "users/:id": "users",
-        "projects/": "projects",
+        "projects": "projects",
         "projects/:id": "projects",
         "about":"about"
+
     },
 
     index: function() {
