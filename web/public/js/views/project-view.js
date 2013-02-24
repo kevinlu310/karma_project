@@ -7,7 +7,7 @@ nyuad.Views.ProjectView = Backbone.View.extend({
    comments_template: _.template($("#comment-list-template").html()),
 
    events: {
-      // Nothing
+      "click .contribute": "contribute"
    },
 
    initialize: function() {
@@ -35,5 +35,22 @@ nyuad.Views.ProjectView = Backbone.View.extend({
          that.$("#comment-list").append(that.comments_template(comment));
       });
       return this;
+   },
+
+   contribute: function (e) {
+      e.preventDefault();
+      var value = $("#moneyAmount").val();
+      var funding = this.model.get("current_fund") || 0;
+      funding += value;
+      this.model.set("current_fund", funding);
+
+      var contribs  = this.model.get("contributing_users");
+      contribs.push({
+         user_id: nyuad.id,
+         name: nyuad.name
+      });
+
+      this.model.set("contributing_users", contribs);
+      this.render();
    }
 });
