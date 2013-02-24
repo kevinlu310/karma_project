@@ -29,6 +29,11 @@ h1 {
 	color:white;
 }
 
+#hero-unit-img{
+	height: 200px;
+	width:100%;
+}
+
 #profile-img{
 	height: 200px;
 	width: 100%;
