@@ -5,6 +5,7 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
         "index": "index",
         "users/:id": "users",
         "projects": "projects",
+        "projects/create": "createProject",
         "projects/:id": "projects",
         "about":"about"
 
@@ -23,6 +24,10 @@ nyuad.Routers.ApplicationRouter = Backbone.Router.extend({
         } else {
             alert("User must specify an id");
         }
+    },
+
+    createProject: function(){
+
     },
 
     projects: function(id) {
