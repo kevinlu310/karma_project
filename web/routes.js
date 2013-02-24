@@ -72,9 +72,41 @@ exports.attach = function attachRoutes(app) {
 
 
 
+   app.post('/api/projects/:pid/do/:tid',function(req, res) {
+	   var moneyAmount = req.body.moneyAmount,
+	   	   owner_id = req.user;
+
+      console.log("USER POST", owner_id);
+      console.log("BODY", req.body);
+	   	   
+      if (!owner_id) {
+         res.send("{error: 'user is undefined'}");
+         return;
+      }
+
+      var db = connectDB(app);
+
+      var update = 'UPDATE project_task_user SET user_id = ? WHERE project_id = ? AND task_id = ?';
+      var post_set = {
+         user_id: owner_id
+      };
+      var post_where = {
+         project_id: req.params.pid,
+         task_id: req.params.tid
+      };
+      console.log("UPDATE post_set ", post_set);
+      console.log("UPDATE post_where ", post_where);
+
+      var query = db.query(update, [owner_id, req.params.pid, req.params.tid], function(err, rows, fields) {
+         console.log("updated", err);
+         db.end();
+         res.send(rows);
+      });
+   });
+
    app.post('/api/projects/:id/fund',function(req, res) {
 	   var moneyAmount = req.body.moneyAmount,
-	   	   owner_id = /* req.user */1;
+	   	   owner_id = req.user;
 
       console.log("USER POST", owner_id);
       console.log("BODY", req.body);
