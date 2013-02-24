@@ -12,7 +12,10 @@ nyuad.Models.Project = Backbone.Model.extend({
       "current_fund": 0,
       "task_count": 0,
       "task_not_assigned": 0,
-      "user_count": 0
+      "user_count": 0,
+      "tasks_projects": [],
+      "contributing_users": [],
+      "comments": []
    },
 
    initialize: function() {

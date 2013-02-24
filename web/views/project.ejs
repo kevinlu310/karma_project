@@ -8,7 +8,7 @@
             <dt>Project Name</dt>
             <dd><@- title @></dd>
             <dt>Project Owner</dt>
-            <dd><a href="#/users/<@- owner @>">TODO</a></dd>
+            <dd><a href="#/users/<@- owner @>"><@- owner_name @></a></dd>
             <dt>Total Fund Needed</dt>
             <dd><@- funding @></dd>
             <dt>Total Tasks Needed</dt>
@@ -37,18 +37,7 @@
            <li>
              <h3>Tasks</h3>
              <table class="table table-striped" id="task-list">
-               <tr>
-                 <td class="span10">Task1</td>
-                 <td class="span2"><button class="btn btn-small btn-primary" type="button">I'll Do it!</button></td>
-              </tr>
-              <tr>
-                 <td class="span10">Task2</td>
-                 <td class="span2"><button class="btn btn-small btn-primary" type="button">I'll Do it!</button></td>
-              </tr>
-              <tr>
-                 <td class="span10">Task3</td>
-                 <td class="span2"><button class="btn btn-small btn-primary" type="button">I'll Do it!</button></td>
-              </tr>
+
            </table>
         </li>
      </div>
@@ -72,10 +61,8 @@
    </li>
    <li class="span2">
      <h3>Contributers</h3>
-     <ul>
-       <li><a href="#">User 1</a></li>
-       <li><a href="#">User 2</a></li>
-       <li><a href="#">User 3</a></li>
+     <ul id="contributor-list">
+
     </ul>
  </li>
  <li class="span8">
@@ -86,19 +73,12 @@
  </form>
 
  <table class="table table-striped">
+   <thead>
    <tr><th class="span3">User</th><th class="span9">Comment</th></tr>
-   <tr>
-     <td><a href="#">USER 1</a></td>
-     <td>COMMENT 1</td>
-  </tr>
-  <tr>
-     <td><a href="#">USER 2</a></td>
-     <td>COMMENT 2</td>
-  </tr>
-  <tr>
-     <td><a href="#">USER 3</a></td>
-     <td>COMMENT 3</td>
-  </tr>
+   </thead>
+   <tbody id="comment-list">
+
+   </tbody>
 </table>
 </li>
 </div>
